@@ -1,6 +1,6 @@
 # Digital Compass
 
-Android 向けのデジタルコンパスアプリケーションです。 Jetpack Compose と Material Design 3 を使用して構築されています。
+Jetpack Compose と Material Design 3 で構築した Android 向けデジタルコンパスアプリです。
 
 ![Digital Compass Demo](capture/record-250729044446.gif)
 
@@ -14,11 +14,11 @@ Android 向けのデジタルコンパスアプリケーションです。 Jetpa
 
 ## 技術スタック
 
-- **言語**: Kotlin 2.0.21
-- **UI フレームワーク**: Jetpack Compose
-- **デザインシステム**: Material Design 3
-- **最小 SDK**: 31 （ Android 12 ）
-- **ターゲット SDK**: 35 （ Android 15 ）
+- 言語: Kotlin 2.0.21
+- UI フレームワーク: Jetpack Compose
+- デザインシステム: Material Design 3
+- 最小 SDK: 31 （ Android 12 ）
+- ターゲット SDK: 35 （ Android 15 ）
 
 ## セットアップ
 
@@ -88,9 +88,9 @@ app/
 
 このアプリは MVVM （ Model-View-ViewModel ）アーキテクチャパターンを採用しています：
 
-- **View**: Jetpack Compose による UI コンポーネント
-- **ViewModel**: センサーデータの管理とビジネスロジック
-- **Model**: センサーデータとドメインロジック
+- View: Jetpack Compose による UI コンポーネント
+- ViewModel: センサーデータの管理とビジネスロジック
+- Model: センサーデータとドメインロジック
 
 ## 主な機能の実装
 
@@ -112,17 +112,17 @@ app/
 
 このプロジェクトは Claude Code Actions と Claude AI を活用して開発されました：
 
-1. **Issue 駆動開発**: GitHub Actions の Claude Code Actions を使用して、 Issue から直接実装を開始
-2. **AI アシスト開発**: Claude AI が Issue の要件を理解し、 Kotlin と Jetpack Compose のベストプラクティスに従って実装
-3. **自動コード生成**: センサー管理、 UI コンポーネント、 ViewModel の実装を AI が支援
-4. **品質保証**: Material Design 3 のガイドラインに準拠し、モダンな Android 開発の標準に従った実装
+1. Issue 駆動開発: GitHub Actions の Claude Code Actions で Issue から実装開始
+2. AI アシスト開発: Claude AI が要件を解析し、 Kotlin と Jetpack Compose のパターンに沿って実装
+3. コード生成支援: センサー管理、 UI コンポーネント、 ViewModel の実装を AI がサポート
+4. 品質管理: Material Design 3 のガイドラインに準拠した実装
 
 ### Claude Code Actions の活用
 
-- Issue に要件を記載するだけで、 Claude が自動的にコードを生成
-- Jetpack Compose の最新パターンを適用
-- MVVM アーキテクチャの自動実装
-- コードレビューと改善提案の自動化
+- [Issue](https://github.com/takumi-saito/digital-compass/issues?q=is%3Aissue%20state%3Aclosed) に要件を記載し、 Claude が自動的にコードを生成
+- Jetpack Compose のパターン適用
+- MVVM アーキテクチャ実装
+- コードレビューと改善提案
 
 ## 貢献
 
