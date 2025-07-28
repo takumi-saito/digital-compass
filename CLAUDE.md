@@ -1,84 +1,84 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、このリポジトリでコードを扱う際の Claude Code (claude.ai/code) へのガイダンスを提供します。
 
-## Project Overview
+## プロジェクト概要
 
-This is an Android application written in Kotlin using Jetpack Compose. The project is set up as a modern Android app with a focus on Material Design 3 and Compose UI.
+これは Kotlin と Jetpack Compose を使用した Android アプリケーションです。 Material Design 3 と Compose UI に重点を置いた最新の Android アプリとしてセットアップされています。
 
-## Build and Development Commands
+## ビルドと開発コマンド
 
-### Build commands
+### ビルドコマンド
 ```bash
-# Build debug APK
+# デバッグ APK をビルド
 ./gradlew assembleDebug
 
-# Build release APK
+# リリース APK をビルド
 ./gradlew assembleRelease
 
-# Clean build
+# クリーンビルド
 ./gradlew clean
 
-# Build and install on connected device
+# 接続されたデバイスにビルド&インストール
 ./gradlew installDebug
 ```
 
-### Testing
+### テスト
 ```bash
-# Run unit tests
+# ユニットテストを実行
 ./gradlew test
 
-# Run instrumented tests (requires device/emulator)
+# インストルメンテーションテストを実行（デバイス/エミュレータが必要）
 ./gradlew connectedAndroidTest
 
-# Run a specific test class
+# 特定のテストクラスを実行
 ./gradlew test --tests "t.saito.digitalcompass.ExampleUnitTest"
 ```
 
-### Code quality
+### コード品質
 ```bash
-# Run lint checks
+# Lint チェックを実行
 ./gradlew lint
 
-# View lint results
-# Results are in: app/build/reports/lint-results-debug.html
+# Lint 結果を確認
+# 結果は次の場所にあります: app/build/reports/lint-results-debug.html
 ```
 
-## Architecture
+## アーキテクチャ
 
-### Technology Stack
-- **Language**: Kotlin 2.0.21
-- **UI Framework**: Jetpack Compose with Material 3
-- **Build System**: Gradle with Kotlin DSL
-- **Minimum SDK**: 31 (Android 12)
-- **Target SDK**: 35 (Android 15)
+### 技術スタック
+- **言語**: Kotlin 2.0.21
+- **UI フレームワーク**: Jetpack Compose と Material 3
+- **ビルドシステム**: Gradle （ Kotlin DSL 使用）
+- **最小 SDK**: 31 （ Android 12 ）
+- **ターゲット SDK**: 35 （ Android 15 ）
 
-### Project Structure
-- **app/src/main/java/t/saito/digitalcompass/** - Main application code
-  - `MainActivity.kt` - Entry point using Compose
-  - `ui/theme/` - Compose theme configuration (Color, Type, Theme)
-- **app/src/main/res/** - Android resources
-  - XML resources for app configuration
-  - Drawable and mipmap resources for icons
-- **gradle/libs.versions.toml** - Version catalog for dependencies
+### プロジェクト構造
+- **app/src/main/java/t/saito/digitalcompass/** - メインアプリケーションコード
+  - `MainActivity.kt` - Compose を使用したエントリポイント
+  - `ui/theme/` - Compose テーマ設定（ Color 、 Type 、 Theme ）
+- **app/src/main/res/** - Android リソース
+  - アプリ設定用の XML リソース
+  - アイコン用の drawable と mipmap リソース
+- **gradle/libs.versions.toml** - 依存関係のバージョンカタログ
 
-### Key Dependencies
+### 主要な依存関係
 - AndroidX Core KTX
 - Lifecycle Runtime KTX
 - Activity Compose
 - Compose BOM (Bill of Materials)
 - Material 3 Components
 
-## Development Notes
+## 開発ノート
 
-### Compose UI Pattern
-The app uses the standard Compose pattern with:
-- `setContent` in MainActivity to initialize the UI
-- `DigitalCompassTheme` wrapper for consistent theming
-- `Scaffold` for Material Design structure
-- Preview annotations for development
+### Compose UI パターン
+このアプリは以下の標準的な Compose パターンを使用しています：
+- MainActivity 内の `setContent` で UI を初期化
+- `DigitalCompassTheme` ラッパーで一貫したテーマを適用
+- `Scaffold` で Material Design 構造を実現
+- 開発用の Preview アノテーション
 
-### Gradle Configuration
-- Uses version catalogs (libs.versions.toml) for dependency management
-- Kotlin DSL for build scripts
-- Java 11 compatibility
+### Gradle 設定
+- 依存関係管理にバージョンカタログ（ libs.versions.toml ）を使用
+- ビルドスクリプトに Kotlin DSL を使用
+- Java 11 互換性
