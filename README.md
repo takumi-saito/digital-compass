@@ -2,7 +2,7 @@
 
 Jetpack Compose と Material Design 3 で構築した Android 向けデジタルコンパスアプリです。
 
-![Digital Compass Demo](capture/record-250729044446.gif)
+<img src="capture/record-250729044446.gif" alt="Digital Compass Screenshot" width="40%"/>
 
 ## 機能
 
