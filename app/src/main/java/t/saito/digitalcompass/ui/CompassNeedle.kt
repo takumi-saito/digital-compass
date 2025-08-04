@@ -1,10 +1,18 @@
 package t.saito.digitalcompass.ui
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -14,6 +22,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import t.saito.digitalcompass.ui.theme.DigitalCompassTheme
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -25,6 +34,26 @@ fun CompassNeedle(
     val primaryColor = MaterialTheme.colorScheme.primary
     val errorColor = MaterialTheme.colorScheme.error
     
+    // Store the previous rotation to calculate shortest path
+    var previousRotation by remember { mutableFloatStateOf(rotation) }
+    
+    // Calculate the target rotation using shortest path logic
+    val targetRotation = remember(rotation) {
+        calculateShortestRotation(previousRotation, rotation).also {
+            previousRotation = it
+        }
+    }
+    
+    // Animate the rotation with spring animation
+    val animatedRotation by animateFloatAsState(
+        targetValue = targetRotation,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioNoBouncy,
+            stiffness = Spring.StiffnessMedium
+        ),
+        label = "compass_needle_rotation"
+    )
+    
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
@@ -35,7 +64,7 @@ fun CompassNeedle(
             val center = Offset(size.width / 2f, size.height / 2f)
             val radius = size.minDimension / 2f * 0.8f
             
-            rotate(degrees = rotation, pivot = center) {
+            rotate(degrees = animatedRotation, pivot = center) {
                 // Draw compass needle
                 drawCompassNeedle(
                     center = center,
@@ -137,4 +166,32 @@ fun CompassNeedleRotatedPreview() {
     DigitalCompassTheme {
         CompassNeedle(rotation = 45f)
     }
+}
+
+/**
+ * Calculate the shortest rotation path between two angles.
+ * This ensures that the needle rotates in the most natural direction
+ * and handles the 360-degree boundary correctly.
+ *
+ * @param from Current rotation angle
+ * @param to Target rotation angle
+ * @return The target rotation angle adjusted for shortest path
+ */
+private fun calculateShortestRotation(from: Float, to: Float): Float {
+    // Normalize both angles to 0-360 range
+    val normalizedFrom = ((from % 360) + 360) % 360
+    val normalizedTo = ((to % 360) + 360) % 360
+    
+    // Calculate the difference
+    var diff = normalizedTo - normalizedFrom
+    
+    // If the difference is more than 180 degrees, go the other way
+    if (diff > 180) {
+        diff -= 360
+    } else if (diff < -180) {
+        diff += 360
+    }
+    
+    // Return the adjusted target rotation
+    return from + diff
 }
