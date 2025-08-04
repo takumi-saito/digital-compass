@@ -38,11 +38,9 @@ fun CompassNeedle(
     var previousRotation by remember { mutableFloatStateOf(rotation) }
     
     // Calculate the target rotation using shortest path logic
-    val targetRotation by remember {
-        derivedStateOf {
-            calculateShortestRotation(previousRotation, rotation).also {
-                previousRotation = it
-            }
+    val targetRotation = remember(rotation) {
+        calculateShortestRotation(previousRotation, rotation).also {
+            previousRotation = it
         }
     }
     
