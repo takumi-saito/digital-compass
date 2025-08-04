@@ -55,3 +55,15 @@ jobs:
           # Optional: grant additional permissions (requires corresponding GitHub token permissions)
           # additional_permissions: |
           #   actions: read
+          # Custom instructions for Claude
+          custom_instructions: |
+            必ず日本語で回答してください。技術用語は英語のままで構いません。
+            
+            コード実装後は、以下のコマンドを順番に必ず実行してコード品質を確保してください：
+            1. './gradlew lint' を実行して Android lint の問題をチェック
+            2. 発見された lint の警告やエラーを報告
+            3. lint の問題がある場合は修正を試みる
+            4. './gradlew assembleDebug' を実行してビルドが成功することを確認
+            5. ビルドエラーが発生した場合は、エラー内容を報告して修正を試みる
+            
+            重要：コード実装タスクの最終ステップとして、必ず lint チェックとビルド確認を実行してください。
